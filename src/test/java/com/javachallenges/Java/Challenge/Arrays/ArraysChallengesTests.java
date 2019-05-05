@@ -1,5 +1,6 @@
 package com.javachallenges.Java.Challenge.Arrays;
 
+import com.javachallenges.Java.Challenge.ArraysDs;
 import com.javachallenges.Java.Challenge.HourGlass;
 import org.junit.Test;
 
@@ -10,7 +11,6 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -144,5 +144,20 @@ public class ArraysChallengesTests {
     assertThat(firstVertexSum, equalTo(-6));
     assertThat(secondVertexSum, equalTo(-20));
     assertThat(maxSum, equalTo(-6));
+  }
+
+  @Test
+  public void reverseArrayShouldWorkOk() {
+    // given
+    int[] a = new int[] {1, 4, 3, 2};
+
+    // when
+    int[] reversedArray = ArraysDs.reverse(a);
+
+    // then
+    assertThat(reversedArray[0], equalTo(2));
+    assertThat(reversedArray[1], equalTo(3));
+    assertThat(reversedArray[2], equalTo(4));
+    assertThat(reversedArray[3], equalTo(1));
   }
 }
