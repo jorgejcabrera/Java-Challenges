@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -147,7 +148,7 @@ public class ArraysChallengesTests {
   }
 
   @Test
-  public void reverseArrayShouldWorkOk() {
+  public void challengeArrayThreeReverseArrayShouldWorkOk() {
     // given
     int[] a = new int[] {1, 4, 3, 2};
 
@@ -159,5 +160,70 @@ public class ArraysChallengesTests {
     assertThat(reversedArray[1], equalTo(3));
     assertThat(reversedArray[2], equalTo(4));
     assertThat(reversedArray[3], equalTo(1));
+  }
+
+  @Test
+  public void challengeArrayFourDynamicArrayShouldWorkOk() {
+    // given
+    int numberOfSequences = 2;
+    List<Integer> firstQuery =
+        new ArrayList<Integer>() {
+          {
+            add(1);
+            add(0);
+            add(5);
+          }
+        };
+    List<Integer> secondQuery =
+        new ArrayList<Integer>() {
+          {
+            add(1);
+            add(1);
+            add(7);
+          }
+        };
+    List<Integer> thirdQuery =
+        new ArrayList<Integer>() {
+          {
+            add(1);
+            add(0);
+            add(3);
+          }
+        };
+    List<Integer> fourthQuery =
+        new ArrayList<Integer>() {
+          {
+            add(2);
+            add(1);
+            add(0);
+          }
+        };
+    List<Integer> fifthQuery =
+        new ArrayList<Integer>() {
+          {
+            add(2);
+            add(1);
+            add(1);
+          }
+        };
+    List<List<Integer>> queries =
+        new ArrayList<List<Integer>>() {
+          {
+            add(firstQuery);
+            add(secondQuery);
+            add(thirdQuery);
+            add(fourthQuery);
+            add(fifthQuery);
+          }
+        };
+
+    // when
+    List<Integer> dynamicArray = ArraysDs.dynamicArray(numberOfSequences, queries);
+
+    // then
+    assertThat(dynamicArray.contains(7), is(true));
+    assertThat(dynamicArray.contains(3), is(true));
+    assertThat(dynamicArray.contains(5), is(true));
+    assertThat(dynamicArray.size(), is(3));
   }
 }
