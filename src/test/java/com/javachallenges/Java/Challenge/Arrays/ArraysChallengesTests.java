@@ -2,7 +2,9 @@ package com.javachallenges.Java.Challenge.Arrays;
 
 import com.javachallenges.Java.Challenge.ArraysDs;
 import com.javachallenges.Java.Challenge.HourGlass;
+import com.sun.deploy.util.ArrayUtil;
 import org.junit.Test;
+import org.springframework.test.context.TestExecutionListeners;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -225,5 +227,20 @@ public class ArraysChallengesTests {
     assertThat(dynamicArray.contains(3), is(true));
     assertThat(dynamicArray.contains(5), is(true));
     assertThat(dynamicArray.size(), is(3));
+  }
+
+  @Test
+  public void challengeFiveReverseArrayShouldWorkOk() {
+    // given
+    int[] array = {1, 2, 3, 4, 5};
+    int d = 4;
+
+    // when
+    int[] result = ArraysDs.leftRotation(array, d);
+
+    // then
+    assertThat(result[0],equalTo(5));
+    assertThat(result[1],equalTo(1));
+    assertThat(result[4],equalTo(4));
   }
 }

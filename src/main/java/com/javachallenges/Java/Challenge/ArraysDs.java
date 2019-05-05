@@ -1,14 +1,22 @@
 package com.javachallenges.Java.Challenge;
 
+
+import org.apache.commons.lang3.ArrayUtils;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ArraysDs {
 
   private static Integer queryTypeIndex = 0;
   private static Integer xIndex = 1;
   private static Integer yIndex = 2;
+
+  public static int[] leftRotation(int[] a, int d) {
+    int[] begin = IntStream.range(d,a.length).map(j -> a[j]).toArray();
+    int[] end = IntStream.range(0,d).map(j -> a[j]).toArray();
+    return ArrayUtils.addAll(begin,end);
+  }
 
   public static int[] reverse(int[] a) {
     int size = a.length;
@@ -44,7 +52,7 @@ public class ArraysDs {
         System.out.println(lastAnswer);
       }
     }
-    return output/*sequences.stream().flatMap(List::stream).collect(Collectors.toList())*/;
+    return output;
   }
 
   private static List<List<Integer>> createSequences(int n) {
@@ -54,7 +62,7 @@ public class ArraysDs {
     }
     return sequences;
   }
-
+  
   private static int calculateIndex(int value, int lastAnswer, int n) {
     return (value ^ lastAnswer) % n;
   }
