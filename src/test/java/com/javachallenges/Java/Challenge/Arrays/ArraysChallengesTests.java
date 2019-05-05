@@ -86,4 +86,63 @@ public class ArraysChallengesTests {
     assertThat(secondVertexSum, equalTo(-34));
     assertThat(maxSum, equalTo(28));
   }
+
+  @Test
+  public void challengeArrayTwo_withCompleteMatrixShouldWorkOk() {
+    // given
+    int[][] matrix = new int[6][6];
+    matrix[0][0] = -1;
+    matrix[0][1] = -1;
+    matrix[0][2] = 0;
+    matrix[0][3] = -9;
+    matrix[0][4] = -2;
+    matrix[0][5] = -2;
+
+    matrix[1][0] = -2;
+    matrix[1][1] = -1;
+    matrix[1][2] = -6;
+    matrix[1][3] = -8;
+    matrix[1][4] = -2;
+    matrix[1][5] = -5;
+
+    matrix[2][0] = -1;
+    matrix[2][1] = -1;
+    matrix[2][2] = -1;
+    matrix[2][3] = -2;
+    matrix[2][4] = -3;
+    matrix[2][5] = -4;
+
+    matrix[3][0] = -1;
+    matrix[3][1] = -9;
+    matrix[3][2] = -2;
+    matrix[3][3] = -4;
+    matrix[3][4] = -4;
+    matrix[3][5] = -5;
+
+    matrix[4][0] = -7;
+    matrix[4][1] = -3;
+    matrix[4][2] = -3;
+    matrix[4][3] = -2;
+    matrix[4][4] = -9;
+    matrix[4][5] = -9;
+
+    matrix[5][0] = -1;
+    matrix[5][1] = -3;
+    matrix[5][2] = -1;
+    matrix[5][3] = -2;
+    matrix[5][4] = -4;
+    matrix[5][5] = -5;
+
+    // when
+    List<int[][]> vertexes = HourGlass.getVertexesList(matrix);
+    Integer firstVertexSum = HourGlass.sum(matrix, vertexes.get(0));
+    Integer secondVertexSum = HourGlass.sum(matrix, vertexes.get(1));
+    Integer maxSum = HourGlass.hourglassSum(matrix);
+
+    // then
+    assertThat(vertexes.size(), equalTo(16));
+    assertThat(firstVertexSum, equalTo(-6));
+    assertThat(secondVertexSum, equalTo(-20));
+    assertThat(maxSum, equalTo(-6));
+  }
 }

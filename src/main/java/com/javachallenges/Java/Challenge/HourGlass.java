@@ -37,7 +37,7 @@ public class HourGlass {
 
   public static int hourglassSum(int[][] matrix) {
     List<int[][]> vertexes = getVertexesList(matrix);
-    Integer maxSum = 0;
+    Integer maxSum = Integer.MIN_VALUE;
     for (int[][] vertex : vertexes) {
       Integer currentSum = sum(matrix, vertex);
       if (currentSum > maxSum) maxSum = currentSum;
