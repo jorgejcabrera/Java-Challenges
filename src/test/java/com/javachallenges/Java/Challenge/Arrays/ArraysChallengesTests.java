@@ -2,16 +2,12 @@ package com.javachallenges.Java.Challenge.Arrays;
 
 import com.javachallenges.Java.Challenge.ArraysDs;
 import com.javachallenges.Java.Challenge.HourGlass;
-import com.sun.deploy.util.ArrayUtil;
 import org.junit.Test;
-import org.springframework.test.context.TestExecutionListeners;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -243,4 +239,18 @@ public class ArraysChallengesTests {
     assertThat(result[1],equalTo(1));
     assertThat(result[4],equalTo(4));
   }
+
+  @Test
+  public void challengeMatchingStrings() {
+    // given
+    String[] strings = {"aba","baba"," aba","xzxb"};
+    String[] queries = {"aba","xzxb","ab"};
+
+    // when
+    int[] results = ArraysDs.matchingStrings(strings,queries);
+
+    // then
+    assertThat(results[0], equalTo(2));
+  }
+
 }

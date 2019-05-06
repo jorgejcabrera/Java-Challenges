@@ -1,8 +1,8 @@
 package com.javachallenges.Java.Challenge;
 
-
 import org.apache.commons.lang3.ArrayUtils;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -13,9 +13,9 @@ public class ArraysDs {
   private static Integer yIndex = 2;
 
   public static int[] leftRotation(int[] a, int d) {
-    int[] begin = IntStream.range(d,a.length).map(j -> a[j]).toArray();
-    int[] end = IntStream.range(0,d).map(j -> a[j]).toArray();
-    return ArrayUtils.addAll(begin,end);
+    int[] begin = IntStream.range(d, a.length).map(j -> a[j]).toArray();
+    int[] end = IntStream.range(0, d).map(j -> a[j]).toArray();
+    return ArrayUtils.addAll(begin, end);
   }
 
   public static int[] reverse(int[] a) {
@@ -62,7 +62,29 @@ public class ArraysDs {
     }
     return sequences;
   }
-  
+
+  public static int[] matchingStrings(String[] strings, String[] queries) {
+    int[] result = new int[queries.length];
+
+    String[] intersection = intersect(strings, queries);
+    for (int i = 0; i < queries.length; i++) {
+      String query = queries[i];
+      int occurrences = 0;
+      for (String string : intersection) {
+        if (query.equals(string)) occurrences = occurrences + 1;
+      }
+      result[i] = occurrences;
+    }
+    return result;
+  }
+
+  private static String[] intersect(String[] strings, String[] queries) {
+    return Arrays.stream(strings)
+        .map(String::trim)
+        .filter(x -> Arrays.stream(queries).anyMatch(y -> y.equals(x)))
+        .toArray(String[]::new);
+  }
+
   private static int calculateIndex(int value, int lastAnswer, int n) {
     return (value ^ lastAnswer) % n;
   }
