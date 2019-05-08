@@ -1,7 +1,5 @@
 package com.javachallenges.Java.Challenge.Arrays;
 
-import com.javachallenges.Java.Challenge.ArraysDs;
-import com.javachallenges.Java.Challenge.HourGlass;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;

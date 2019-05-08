@@ -1,4 +1,4 @@
-package com.javachallenges.Java.Challenge;
+package com.javachallenges.Java.Challenge.Arrays;
 
 import java.util.ArrayList;
 import java.util.List;

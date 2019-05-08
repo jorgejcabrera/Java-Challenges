@@ -1,4 +1,4 @@
-package com.javachallenges.Java.Challenge;
+package com.javachallenges.Java.Challenge.LinkedList;
 
 public class SinglyLinkedListNode {
   public int data;
