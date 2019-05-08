@@ -299,4 +299,27 @@ public class LinkedListDsTest {
     assertThat(mergeLists.next.next.data, equalTo(3));
     assertThat(mergeLists.next.next.next.next.data, equalTo(5));
   }
+
+  @Test
+  public void getNodeValueFromTailShouldWorkOk() {
+    // given
+    SinglyLinkedListNode second = new SinglyLinkedListNode(1);
+    second.next = null;
+    SinglyLinkedListNode first = new SinglyLinkedListNode(2);
+    first.next = second;
+    SinglyLinkedListNode head = new SinglyLinkedListNode(3);
+    head.next = first;
+
+    // then
+    assertThat(LinkedListDs.getNode(head,2),equalTo(3));
+  }
+
+  @Test
+  public void getNodeValueAtSingleLinkedListShouldWorkOk() {
+    // given
+    SinglyLinkedListNode head = new SinglyLinkedListNode(1);
+
+    // then
+    assertThat(LinkedListDs.getNode(head,0),equalTo(1));
+  }
 }

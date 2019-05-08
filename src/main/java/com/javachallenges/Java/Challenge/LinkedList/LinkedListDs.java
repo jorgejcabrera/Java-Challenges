@@ -122,4 +122,32 @@ public class LinkedListDs {
     }
     return newHead;
   }
+
+  private static int getLength(SinglyLinkedListNode head) {
+    if (head == null)
+      return 0;
+    SinglyLinkedListNode current = head;
+    int length = 1;
+    while (current.next != null) {
+      length = length + 1;
+      current = current.next;
+    }
+    return length;
+  }
+
+  private static int getDataAtPosition(SinglyLinkedListNode head, int position) {
+    int i = 0;
+    SinglyLinkedListNode current = head;
+    while (i < position) {
+      i ++;
+      current = current.next;
+    }
+    return current.data;
+  }
+
+  public static int getNode(SinglyLinkedListNode head, int positionFromTail) {
+    int length = getLength(head);
+    return getDataAtPosition(head, length - (positionFromTail + 1));
+  }
+
 }
