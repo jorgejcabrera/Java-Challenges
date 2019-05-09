@@ -311,7 +311,7 @@ public class LinkedListDsTest {
     head.next = first;
 
     // then
-    assertThat(LinkedListDs.getNode(head,2),equalTo(3));
+    assertThat(LinkedListDs.getNode(head, 2), equalTo(3));
   }
 
   @Test
@@ -320,6 +320,105 @@ public class LinkedListDsTest {
     SinglyLinkedListNode head = new SinglyLinkedListNode(1);
 
     // then
-    assertThat(LinkedListDs.getNode(head,0),equalTo(1));
+    assertThat(LinkedListDs.getNode(head, 0), equalTo(1));
+  }
+
+  @Test
+  public void removeDuplicatedValuesFromSortedLinkedListShouldWorkOk() {
+    // given
+    SinglyLinkedListNode fourth = new SinglyLinkedListNode(4);
+    fourth.next = null;
+    SinglyLinkedListNode third = new SinglyLinkedListNode(3);
+    third.next = fourth;
+    SinglyLinkedListNode second = new SinglyLinkedListNode(2);
+    second.next = third;
+    SinglyLinkedListNode first = new SinglyLinkedListNode(2);
+    first.next = second;
+    SinglyLinkedListNode head = new SinglyLinkedListNode(1);
+    head.next = first;
+
+    // when
+    head = LinkedListDs.removeDuplicates(head);
+
+    // then
+    assertThat(head.next.next.data, equalTo(3));
+    assertThat(head.next.next.next.data, equalTo(4));
+  }
+
+  @Test
+  public void caseTwoRemoveDuplicatedValuesFromSortedLinkedListShouldWorkOk() {
+    // given
+    SinglyLinkedListNode fourth = new SinglyLinkedListNode(4);
+    fourth.next = null;
+    SinglyLinkedListNode third = new SinglyLinkedListNode(2);
+    third.next = fourth;
+    SinglyLinkedListNode second = new SinglyLinkedListNode(2);
+    second.next = third;
+    SinglyLinkedListNode first = new SinglyLinkedListNode(2);
+    first.next = second;
+    SinglyLinkedListNode head = new SinglyLinkedListNode(1);
+    head.next = first;
+
+    // when
+    head = LinkedListDs.removeDuplicates(head);
+
+    // then
+    assertThat(head.data, equalTo(1));
+    assertThat(head.next.data, equalTo(2));
+    assertThat(head.next.next.data, equalTo(4));
+  }
+
+  @Test
+  public void caseThreeRemoveDuplicatedValuesFromSortedLinkedListShouldWorkOk() {
+    // given
+    SinglyLinkedListNode first = new SinglyLinkedListNode(1);
+    first.next = null;
+    SinglyLinkedListNode head = new SinglyLinkedListNode(1);
+    head.next = first;
+
+    // when
+    head = LinkedListDs.removeDuplicates(head);
+
+    // then
+    assertThat(head.data, equalTo(1));
+    assertThat(head.next, equalTo(null));
+  }
+
+  @Test
+  public void caseFourRemoveDuplicatedValuesFromSortedLinkedListShouldWorkOk() {
+    // given
+    SinglyLinkedListNode head = new SinglyLinkedListNode(1);
+
+    // when
+    head = LinkedListDs.removeDuplicates(head);
+
+    // then
+    assertThat(head.data, equalTo(1));
+    assertThat(head.next, equalTo(null));
+  }
+
+  @Test
+  public void caseFiveRemoveDuplicatedValuesFromSortedLinkedListShouldWorkOk() {
+    // given
+    SinglyLinkedListNode fifth = new SinglyLinkedListNode(5);
+    fifth.next = null;
+    SinglyLinkedListNode fourth = new SinglyLinkedListNode(5);
+    fourth.next = fifth;
+    SinglyLinkedListNode third = new SinglyLinkedListNode(4);
+    third.next = fourth;
+    SinglyLinkedListNode second = new SinglyLinkedListNode(3);
+    second.next = third;
+    SinglyLinkedListNode first = new SinglyLinkedListNode(3);
+    first.next = second;
+    SinglyLinkedListNode head = new SinglyLinkedListNode(3);
+    head.next = first;
+
+    // when
+    head = LinkedListDs.removeDuplicates(head);
+
+    // then
+    assertThat(head.data, equalTo(3));
+    assertThat(head.next.data, equalTo(4));
+    assertThat(head.next.next.data, equalTo(5));
   }
 }

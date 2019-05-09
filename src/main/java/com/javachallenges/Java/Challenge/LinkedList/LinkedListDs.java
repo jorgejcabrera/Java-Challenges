@@ -1,5 +1,8 @@
 package com.javachallenges.Java.Challenge.LinkedList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LinkedListDs {
   static SinglyLinkedListNode head;
 
@@ -124,8 +127,7 @@ public class LinkedListDs {
   }
 
   private static int getLength(SinglyLinkedListNode head) {
-    if (head == null)
-      return 0;
+    if (head == null) return 0;
     SinglyLinkedListNode current = head;
     int length = 1;
     while (current.next != null) {
@@ -139,7 +141,7 @@ public class LinkedListDs {
     int i = 0;
     SinglyLinkedListNode current = head;
     while (i < position) {
-      i ++;
+      i++;
       current = current.next;
     }
     return current.data;
@@ -150,4 +152,44 @@ public class LinkedListDs {
     return getDataAtPosition(head, length - (positionFromTail + 1));
   }
 
+  /**
+   * @param head
+   * @return remove all duplicated values of a sorted linked list
+   */
+  public static SinglyLinkedListNode removeDuplicates(SinglyLinkedListNode head) {
+
+    int position = 0;
+    SinglyLinkedListNode current = head;
+    while (current.next != null) {
+      if (current.data == current.next.data) {
+        head = deleteNode(head, position);
+      } else {
+        position++;
+      }
+      current = current.next;
+    }
+    return head;
+  }
+
+  /**
+   * @param head
+   * @return return true if linked list contains a cycle, thus any node is visited more than once
+   *     while traversing the list
+   */
+  static boolean hasCycle(SinglyLinkedListNode head) {
+    if (head == null) {
+      return false;
+    }
+    SinglyLinkedListNode slow = head;
+    SinglyLinkedListNode fast = head;
+
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow == fast) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
