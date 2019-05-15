@@ -31,4 +31,25 @@ public class MixedChallengesTest {
         MixedChallenges.currencyFormatByCountry(price, "fr", "FR").equals("12 324,13 €"),
         equalTo(true));
   }
+
+  @Test
+  public void processStringsShouldWorkOk() {
+    // given
+    String A = "hello";
+    String B = "world";
+
+    // then
+    MixedChallenges.processStrings(A, B);
+  }
+
+  @Test
+  public void printSubString() {
+    // given
+    String str = "Helloworld";
+    int start = 3;
+    int end = 7;
+
+    // then
+    MixedChallenges.printSubstring(str, start, end);
+  }
 }

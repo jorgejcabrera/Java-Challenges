@@ -32,4 +32,20 @@ public class MixedChallenges {
     NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
     return currencyFormatter.format(price);
   }
+
+  public static void processStrings(String A, String B) {
+    System.out.println(String.join("", A, B).length() - 1);
+    String isLexicographicallyGreater = A.compareTo(B) > 0 ? "Yes" : "No";
+    System.out.println(isLexicographicallyGreater);
+    System.out.println(String.format("%s %s", capitalize(A), capitalize(B)));
+  }
+
+  public static void printSubstring(String str, int start, int end) {
+    if (str == null || str.isEmpty() || end < start) return;
+    System.out.println(str.substring(start, end));
+  }
+
+  private static String capitalize(String input) {
+    return input.substring(0, 1).toUpperCase() + input.substring(1);
+  }
 }
