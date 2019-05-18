@@ -132,4 +132,44 @@ public class MixedChallengesTest {
     // then
     assertThat(MixedChallenges.isPalindrome(pattern),equalTo(false));
   }
+
+  @Test
+  public void isAnagramFunctionShouldWorkOk() {
+    // given
+    String A = "anagram";
+    String B = "margana";
+
+    // then
+    assertThat(MixedChallenges.isAnagram(A,B), equalTo(true));
+  }
+
+  @Test
+  public void isAnagramFunctionShouldWorkOkAndCaseInsensitive() {
+    // given
+    String A = "Anagram";
+    String B = "margana";
+
+    // then
+    assertThat(MixedChallenges.isAnagram(A,B), equalTo(true));
+  }
+
+  @Test
+  public void isAnagramFunctionShouldWorkOkWhenAisNotAnBAnagram() {
+    // given
+    String A = "Anagra";
+    String B = "margana";
+
+    // then
+    assertThat(MixedChallenges.isAnagram(A,B), equalTo(false));
+  }
+
+  @Test
+  public void isAnagramFunctionShouldWorkOkWhenAIsNull() {
+    // given
+    String A = "Anagra";
+    String B = "margana";
+
+    // then
+    assertThat(MixedChallenges.isAnagram(A,B), equalTo(false));
+  }
 }

@@ -4,8 +4,11 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+
+import static java.util.stream.Collectors.toMap;
 
 public class MixedChallenges {
 
@@ -36,7 +39,6 @@ public class MixedChallenges {
   }
 
   /**
-   *
    * @param word
    * @return true when input is a palindrome word
    */
@@ -48,7 +50,7 @@ public class MixedChallenges {
 
   private static String reverse(String original) {
     String reversed = "";
-    for (int i = original.length() - 1;  0 <= i; i--) {
+    for (int i = original.length() - 1; 0 <= i; i--) {
       reversed += original.charAt(i);
     }
     return reversed;
@@ -87,12 +89,35 @@ public class MixedChallenges {
   }
 
   public static void checkRegexSyntax(String pattern) {
-      try {
-        Pattern.compile(pattern);
-        System.out.println("Valid");
-      } catch (PatternSyntaxException exception) {
-        System.out.println("Invalid");
-      }
+    try {
+      Pattern.compile(pattern);
+      System.out.println("Valid");
+    } catch (PatternSyntaxException exception) {
+      System.out.println("Invalid");
+    }
+  }
+
+  /**
+   * @param a
+   * @param b
+   * @return true if a and b are anagrams, if they contains the same characters in the same
+   *     frequency
+   */
+  static boolean isAnagram(String a, String b) {
+    if (a == null || b == null || a.isEmpty() || b.isEmpty() || a.length() != b.length())
+      return false;
+    Map<Character, Integer> freqA =
+        a.toLowerCase()
+            .chars()
+            .boxed()
+            .collect(toMap(k -> (char) k.intValue(), v -> 1, Integer::sum));
+
+    Map<Character, Integer> freqB =
+        b.toLowerCase()
+            .chars()
+            .boxed()
+            .collect(java.util.stream.Collectors.toMap(k -> (char) k.intValue(), v -> 1, Integer::sum));
+    return freqA.equals(freqB);
   }
 
   private static String capitalize(String input) {

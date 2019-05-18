@@ -176,7 +176,6 @@ public class ArraysChallengesTests {
     // then
     assertThat(dynamicArray.contains(7), is(true));
     assertThat(dynamicArray.contains(3), is(true));
-
   }
 
   @Test
