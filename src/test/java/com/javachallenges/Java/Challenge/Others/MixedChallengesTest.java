@@ -52,4 +52,57 @@ public class MixedChallengesTest {
     // then
     MixedChallenges.printSubstring(str, start, end);
   }
+
+  @Test
+  public void getSmallestAndLargestShouldWorkOk() {
+    // given
+    String input = "welcometojava";
+    int k = 3;
+    // when
+    String smallestAndLargest = MixedChallenges.getSmallestAndLargest(input, k);
+    // then
+    assertThat(smallestAndLargest, equalTo("ava" + "\n" + "wel"));
+  }
+
+  @Test
+  public void getSmallestAndLargestReceiveInvalidLengthShouldWorkOk() {
+    // given
+    String input = "welcometojava";
+    int k = 20;
+    // when
+    String smallestAndLargest = MixedChallenges.getSmallestAndLargest(input, k);
+    // then
+    assertThat(smallestAndLargest, equalTo("" + "\n" + ""));
+  }
+
+  @Test
+  public void getSmallestAndLargestReceiveALittleLengthShouldWorkOk() {
+    // given
+    String input = "welcometojava";
+    int k = 1;
+    // when
+    String smallestAndLargest = MixedChallenges.getSmallestAndLargest(input, k);
+    // then
+    assertThat(smallestAndLargest, equalTo("a" + "\n" + "w"));
+  }
+
+  @Test
+  public void getSmallestAndLargestReceiveZeroLengthShouldWorkOk() {
+    // given
+    String input = "welcometojava";
+    int k = 0;
+    // when
+    String smallestAndLargest = MixedChallenges.getSmallestAndLargest(input, k);
+    // then
+    assertThat(smallestAndLargest, equalTo("" + "\n" + ""));
+  }
+
+  @Test
+  public void checkRegexSintaxShouldWorkOk() {
+    // given
+    String pattern = "[AZ[a-z](a-z)";
+
+    // then
+    MixedChallenges.checkRegexSintax(pattern);
+  }
 }
