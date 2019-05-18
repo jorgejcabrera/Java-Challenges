@@ -162,56 +162,13 @@ public class ArraysChallengesTests {
   public void challengeArrayFourDynamicArrayShouldWorkOk() {
     // given
     int numberOfSequences = 2;
-    List<Integer> firstQuery =
-        new ArrayList<Integer>() {
-          {
-            add(1);
-            add(0);
-            add(5);
-          }
-        };
-    List<Integer> secondQuery =
-        new ArrayList<Integer>() {
-          {
-            add(1);
-            add(1);
-            add(7);
-          }
-        };
-    List<Integer> thirdQuery =
-        new ArrayList<Integer>() {
-          {
-            add(1);
-            add(0);
-            add(3);
-          }
-        };
-    List<Integer> fourthQuery =
-        new ArrayList<Integer>() {
-          {
-            add(2);
-            add(1);
-            add(0);
-          }
-        };
-    List<Integer> fifthQuery =
-        new ArrayList<Integer>() {
-          {
-            add(2);
-            add(1);
-            add(1);
-          }
-        };
+    List<Integer> firstQuery = Arrays.asList(1, 0, 5);
+    List<Integer> secondQuery = Arrays.asList(1, 1, 7);
+    List<Integer> thirdQuery = Arrays.asList(1, 0, 3);
+    List<Integer> fourthQuery = Arrays.asList(2, 1, 0);
+    List<Integer> fifthQuery = Arrays.asList(2, 1, 1);
     List<List<Integer>> queries =
-        new ArrayList<List<Integer>>() {
-          {
-            add(firstQuery);
-            add(secondQuery);
-            add(thirdQuery);
-            add(fourthQuery);
-            add(fifthQuery);
-          }
-        };
+        Arrays.asList(firstQuery, secondQuery, thirdQuery, fourthQuery, fifthQuery);
 
     // when
     List<Integer> dynamicArray = ArraysDs.dynamicArray(numberOfSequences, queries);
@@ -219,8 +176,7 @@ public class ArraysChallengesTests {
     // then
     assertThat(dynamicArray.contains(7), is(true));
     assertThat(dynamicArray.contains(3), is(true));
-    assertThat(dynamicArray.contains(5), is(true));
-    assertThat(dynamicArray.size(), is(3));
+
   }
 
   @Test
@@ -233,22 +189,21 @@ public class ArraysChallengesTests {
     int[] result = ArraysDs.leftRotation(array, d);
 
     // then
-    assertThat(result[0],equalTo(5));
-    assertThat(result[1],equalTo(1));
-    assertThat(result[4],equalTo(4));
+    assertThat(result[0], equalTo(5));
+    assertThat(result[1], equalTo(1));
+    assertThat(result[4], equalTo(4));
   }
 
   @Test
   public void challengeMatchingStrings() {
     // given
-    String[] strings = {"aba","baba"," aba","xzxb"};
-    String[] queries = {"aba","xzxb","ab"};
+    String[] strings = {"aba", "baba", " aba", "xzxb"};
+    String[] queries = {"aba", "xzxb", "ab"};
 
     // when
-    int[] results = ArraysDs.matchingStrings(strings,queries);
+    int[] results = ArraysDs.matchingStrings(strings, queries);
 
     // then
     assertThat(results[0], equalTo(2));
   }
-
 }
