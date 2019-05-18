@@ -35,6 +35,25 @@ public class MixedChallenges {
     return currencyFormatter.format(price);
   }
 
+  /**
+   *
+   * @param word
+   * @return true when input is a palindrome word
+   */
+  public static boolean isPalindrome(String word) {
+    if (word == null) return false;
+    String reverse = reverse(word);
+    return word.equals(reverse);
+  }
+
+  private static String reverse(String original) {
+    String reversed = "";
+    for (int i = original.length() - 1;  0 <= i; i--) {
+      reversed += original.charAt(i);
+    }
+    return reversed;
+  }
+
   public static void processStrings(String A, String B) {
     System.out.println(String.join("", A, B).length() - 1);
     String isLexicographicallyGreater = A.compareTo(B) > 0 ? "Yes" : "No";
@@ -67,7 +86,7 @@ public class MixedChallenges {
     return smallest + "\n" + largest;
   }
 
-  public static void checkRegexSintax(String pattern) {
+  public static void checkRegexSyntax(String pattern) {
       try {
         Pattern.compile(pattern);
         System.out.println("Valid");

@@ -98,11 +98,38 @@ public class MixedChallengesTest {
   }
 
   @Test
-  public void checkRegexSintaxShouldWorkOk() {
+  public void checkRegexSyntaxShouldWorkOk() {
     // given
     String pattern = "[AZ[a-z](a-z)";
 
     // then
-    MixedChallenges.checkRegexSintax(pattern);
+    MixedChallenges.checkRegexSyntax(pattern);
+  }
+
+  @Test
+  public void isPalindromeFunctionShouldWorkOk() {
+    // given
+    String pattern = "madam";
+
+    // then
+    assertThat(MixedChallenges.isPalindrome(pattern),equalTo(true));
+  }
+
+  @Test
+  public void isPalindromeFunctionShouldWorkOkWhenInputIsEmpty() {
+    // given
+    String pattern = "";
+
+    // then
+    assertThat(MixedChallenges.isPalindrome(pattern),equalTo(true));
+  }
+
+  @Test
+  public void isPalindromeFunctionShouldWorkOkWhenInputIsNull() {
+    // given
+    String pattern = null;
+
+    // then
+    assertThat(MixedChallenges.isPalindrome(pattern),equalTo(false));
   }
 }
