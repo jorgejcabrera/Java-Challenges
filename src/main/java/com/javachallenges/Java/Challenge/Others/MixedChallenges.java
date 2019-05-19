@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Locale;
 import java.util.Map;
-
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -119,14 +118,15 @@ public class MixedChallenges {
         b.toLowerCase()
             .chars()
             .boxed()
-            .collect(java.util.stream.Collectors.toMap(k -> (char) k.intValue(), v -> 1, Integer::sum));
+            .collect(
+                java.util.stream.Collectors.toMap(k -> (char) k.intValue(), v -> 1, Integer::sum));
     return freqA.equals(freqB);
   }
 
   public static void tokenize(String input) {
     java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(REGEX);
     java.util.regex.Matcher matcher = pattern.matcher(input);
-    java.util.List<String> l = new  java.util.ArrayList<>();
+    java.util.List<String> l = new java.util.ArrayList<>();
     while (matcher.find()) {
       String s = matcher.group();
       l.add(s);

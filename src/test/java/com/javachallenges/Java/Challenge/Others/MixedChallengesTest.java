@@ -112,7 +112,7 @@ public class MixedChallengesTest {
     String pattern = "madam";
 
     // then
-    assertThat(MixedChallenges.isPalindrome(pattern),equalTo(true));
+    assertThat(MixedChallenges.isPalindrome(pattern), equalTo(true));
   }
 
   @Test
@@ -121,7 +121,7 @@ public class MixedChallengesTest {
     String pattern = "";
 
     // then
-    assertThat(MixedChallenges.isPalindrome(pattern),equalTo(true));
+    assertThat(MixedChallenges.isPalindrome(pattern), equalTo(true));
   }
 
   @Test
@@ -130,7 +130,7 @@ public class MixedChallengesTest {
     String pattern = null;
 
     // then
-    assertThat(MixedChallenges.isPalindrome(pattern),equalTo(false));
+    assertThat(MixedChallenges.isPalindrome(pattern), equalTo(false));
   }
 
   @Test
@@ -140,7 +140,7 @@ public class MixedChallengesTest {
     String B = "margana";
 
     // then
-    assertThat(MixedChallenges.isAnagram(A,B), equalTo(true));
+    assertThat(MixedChallenges.isAnagram(A, B), equalTo(true));
   }
 
   @Test
@@ -150,7 +150,7 @@ public class MixedChallengesTest {
     String B = "margana";
 
     // then
-    assertThat(MixedChallenges.isAnagram(A,B), equalTo(true));
+    assertThat(MixedChallenges.isAnagram(A, B), equalTo(true));
   }
 
   @Test
@@ -160,7 +160,7 @@ public class MixedChallengesTest {
     String B = "margana";
 
     // then
-    assertThat(MixedChallenges.isAnagram(A,B), equalTo(false));
+    assertThat(MixedChallenges.isAnagram(A, B), equalTo(false));
   }
 
   @Test
@@ -170,7 +170,7 @@ public class MixedChallengesTest {
     String B = "margana";
 
     // then
-    assertThat(MixedChallenges.isAnagram(A,B), equalTo(false));
+    assertThat(MixedChallenges.isAnagram(A, B), equalTo(false));
   }
 
   @Test
