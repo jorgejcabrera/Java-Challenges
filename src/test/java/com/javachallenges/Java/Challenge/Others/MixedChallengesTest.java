@@ -172,4 +172,13 @@ public class MixedChallengesTest {
     // then
     assertThat(MixedChallenges.isAnagram(A,B), equalTo(false));
   }
+
+  @Test
+  public void tokenizeMethodShouldWorkOk() {
+    // given
+    String text = "He is a very very good boy, isn't he?";
+
+    // then
+    MixedChallenges.tokenize(text);
+  }
 }

@@ -5,12 +5,15 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Locale;
 import java.util.Map;
+
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import static java.util.stream.Collectors.toMap;
 
 public class MixedChallenges {
+
+  private static final String REGEX = "[a-zA-Z]+";
 
   /**
    * @param month
@@ -118,6 +121,19 @@ public class MixedChallenges {
             .boxed()
             .collect(java.util.stream.Collectors.toMap(k -> (char) k.intValue(), v -> 1, Integer::sum));
     return freqA.equals(freqB);
+  }
+
+  public static void tokenize(String input) {
+    java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(REGEX);
+    java.util.regex.Matcher matcher = pattern.matcher(input);
+    java.util.List<String> l = new  java.util.ArrayList<>();
+    while (matcher.find()) {
+      String s = matcher.group();
+      l.add(s);
+    }
+
+    System.out.println(l.size());
+    l.forEach(System.out::println);
   }
 
   private static String capitalize(String input) {
