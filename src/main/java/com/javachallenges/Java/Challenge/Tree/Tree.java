@@ -46,6 +46,18 @@ public class Tree {
     return left > right ? left : right;
   }
 
+  /**
+   * @param root It must print the values in the tree's postorder traversal as a single line of
+   *     space-separated values.
+   */
+  public static void postOrder(Node root) {
+    if (root.left != null)
+      postOrder(root.left);
+    if (root.right != null)
+      postOrder(root.right);
+    System.out.print(String.format("%d ",root.data));
+  }
+
   private static int height(Node node, int height) {
     int left = height;
     int right = height;

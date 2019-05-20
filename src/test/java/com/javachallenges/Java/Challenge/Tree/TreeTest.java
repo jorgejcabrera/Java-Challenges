@@ -51,7 +51,7 @@ public class TreeTest {
     Node noder31 = new Node(7);
     Node noder21 = new Node(6);
     Node nodel22 = new Node(4);
-    Node nodel21= new Node(1);
+    Node nodel21 = new Node(1);
     Node noder1 = new Node(5);
     Node nodel1 = new Node(2);
     Node root = new Node(3);
@@ -65,5 +65,25 @@ public class TreeTest {
 
     // then
     assertThat(Tree.height(root), equalTo(3));
+  }
+
+  @Test
+  public void postOrderTraversalShouldWorkOk() {
+    // given
+    Node nodeLR4 = new Node(4);
+    Node nodeL3 = new Node(3);
+    Node nodeR3 = new Node(6);
+    Node nodeR2 = new Node(5);
+    Node nodeR1 = new Node(2);
+    Node root = new Node(1);
+
+    nodeL3.right = nodeLR4;
+    nodeR2.left = nodeL3;
+    nodeR2.right = nodeR3;
+    nodeR1.right = nodeR2;
+    root.right = nodeR1;
+
+    // then
+    Tree.postOrder(root);
   }
 }
