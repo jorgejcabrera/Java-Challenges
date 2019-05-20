@@ -51,11 +51,43 @@ public class Tree {
    *     space-separated values.
    */
   public static void postOrder(Node root) {
-    if (root.left != null)
-      postOrder(root.left);
-    if (root.right != null)
-      postOrder(root.right);
-    System.out.print(String.format("%d ",root.data));
+    if (root.left != null) postOrder(root.left);
+    if (root.right != null) postOrder(root.right);
+    System.out.print(String.format("%d ", root.data));
+  }
+
+  public static void topView(Node root) {
+    class QueueObj {
+      Node node;
+      int hd;
+
+      QueueObj(Node node, int hd) {
+        this.node = node;
+        this.hd = hd;
+      }
+    }
+    java.util.Queue<QueueObj> q = new java.util.LinkedList<QueueObj>();
+    java.util.Map<Integer, Node> topViewMap = new java.util.TreeMap<Integer, Node>();
+    if (root == null) {
+      return;
+    } else {
+      q.add(new QueueObj(root, 0));
+    }
+    while (!q.isEmpty()) {
+      QueueObj tmpNode = q.poll();
+      if (!topViewMap.containsKey(tmpNode.hd)) {
+        topViewMap.put(tmpNode.hd, tmpNode.node);
+      }
+      if (tmpNode.node.left != null) {
+        q.add(new QueueObj(tmpNode.node.left, tmpNode.hd - 1));
+      }
+      if (tmpNode.node.right != null) {
+        q.add(new QueueObj(tmpNode.node.right, tmpNode.hd + 1));
+      }
+    }
+    for (java.util.Map.Entry<Integer, Node> entry : topViewMap.entrySet()) {
+      System.out.print(String.format("%d ", entry.getValue().data));
+    }
   }
 
   private static int height(Node node, int height) {

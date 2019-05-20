@@ -86,4 +86,24 @@ public class TreeTest {
     // then
     Tree.postOrder(root);
   }
+
+  @Test
+  public void topViewShouldWorkOk() {
+    // given
+    Node nodeLR4 = new Node(4);
+    Node nodeL3 = new Node(3);
+    Node nodeR3 = new Node(6);
+    Node nodeR2 = new Node(5);
+    Node nodeR1 = new Node(2);
+    Node root = new Node(1);
+
+    nodeL3.right = nodeLR4;
+    nodeR2.left = nodeL3;
+    nodeR2.right = nodeR3;
+    nodeR1.right = nodeR2;
+    root.right = nodeR1;
+
+    // then
+    Tree.topView(root);
+  }
 }
