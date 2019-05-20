@@ -106,4 +106,69 @@ public class TreeTest {
     // then
     Tree.topView(root);
   }
+
+  @Test
+  public void topLevelOrderShouldWorkOk() {
+    // given
+    Node nodeLR4 = new Node(4);
+    Node nodeL3 = new Node(3);
+    Node nodeR3 = new Node(6);
+    Node nodeR2 = new Node(5);
+    Node nodeR1 = new Node(2);
+    Node root = new Node(1);
+
+    nodeL3.right = nodeLR4;
+    nodeR2.left = nodeL3;
+    nodeR2.right = nodeR3;
+    nodeR1.right = nodeR2;
+    root.right = nodeR1;
+
+    // then
+    Tree.levelOrder(root);
+  }
+
+  @Test
+  public void insertShouldWorkOk() {
+    // given
+    Node nodeLR2 = new Node(3);
+    Node nodeLL2 = new Node(1);
+    Node nodeR1 = new Node(7);
+    Node nodeL1 = new Node(2);
+    Node root = new Node(4);
+
+    nodeL1.right = nodeLR2;
+    nodeL1.left = nodeLL2;
+    root.left = nodeL1;
+    root.right = nodeR1;
+
+    // when
+    Tree.insert(root, 6);
+
+    //
+    assertThat(root.left.data, equalTo(2));
+    assertThat(root.left.left.data, equalTo(1));
+    assertThat(root.left.right.data, equalTo(3));
+    assertThat(root.right.data, equalTo(7));
+    assertThat(root.right.left.data, equalTo(6));  }
+
+  @Test
+  public void manyInsertionsShouldWorkOk() {
+    // given
+    Node root = null;
+
+    // when
+    root = Tree.insert(root, 4);
+    root = Tree.insert(root, 2);
+    root = Tree.insert(root, 3);
+    root = Tree.insert(root, 1);
+    root = Tree.insert(root, 7);
+    root = Tree.insert(root, 6);
+
+    // then
+    assertThat(root.left.data, equalTo(2));
+    assertThat(root.left.left.data, equalTo(1));
+    assertThat(root.left.right.data, equalTo(3));
+    assertThat(root.right.data, equalTo(7));
+    assertThat(root.right.left.data, equalTo(6));
+  }
 }

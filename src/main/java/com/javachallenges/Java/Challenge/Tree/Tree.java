@@ -1,5 +1,10 @@
 package com.javachallenges.Java.Challenge.Tree;
 
+import com.javachallenges.Java.Challenge.Others.StringMatcher;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Tree {
 
   /**
@@ -56,16 +61,38 @@ public class Tree {
     System.out.print(String.format("%d ", root.data));
   }
 
-  public static void topView(Node root) {
-    class QueueObj {
-      Node node;
-      int hd;
-
-      QueueObj(Node node, int hd) {
-        this.node = node;
-        this.hd = hd;
-      }
+  /** @param root visit the nodes level by level from left to right */
+  public static void levelOrder(Node root) {
+    java.util.Queue<Node> queue = new java.util.LinkedList<>();
+    queue.add(root);
+    while (!queue.isEmpty()) {
+      Node node = queue.poll();
+      System.out.printf("%d ", node.data);
+      if (node.left != null) queue.add(node.left);
+      if (node.right != null) queue.add(node.right);
     }
+  }
+
+  /**
+   * @param root
+   * @param data
+   * @return Insert the values into their appropriate position in the binary search tree and return
+   *     the root of the updated binary tree
+   */
+  public static Node insert(Node root, int data) {
+    if (root == null) {
+      root = new Node(data);
+      return root;
+    }
+    if (data < root.data)
+      root.left = insert(root.left, data);
+    else if (data > root.data)
+      root.right = insert(root.right, data);
+
+    return root;
+  }
+
+  public static void topView(Node root) {
     java.util.Queue<QueueObj> q = new java.util.LinkedList<QueueObj>();
     java.util.Map<Integer, Node> topViewMap = new java.util.TreeMap<Integer, Node>();
     if (root == null) {
