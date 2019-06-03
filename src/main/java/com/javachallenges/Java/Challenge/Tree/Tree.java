@@ -92,6 +92,19 @@ public class Tree {
     return root;
   }
 
+  /**
+   *
+   * @param root
+   * @param v1
+   * @param v2
+   * @return the lowest common ancestor (LCA) of v1 and v2 in the binary search tree.
+   */
+  /*public static Node lca(Node root, int v1, int v2) {
+    int bigger = v1 > v2 ? v1 : v2;
+    int smaller = v1 > v2 ? v2 : v1;
+    if (root.right.data )
+  }*/
+
   public static void topView(Node root) {
     java.util.Queue<QueueObj> q = new java.util.LinkedList<QueueObj>();
     java.util.Map<Integer, Node> topViewMap = new java.util.TreeMap<Integer, Node>();
