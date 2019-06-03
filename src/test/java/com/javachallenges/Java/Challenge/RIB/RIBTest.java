@@ -4,7 +4,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.javachallenges.Java.Challenge.Others.StringMatcher;
+import inet.ipaddr.AddressStringException;
 import inet.ipaddr.IPAddress;
+import inet.ipaddr.IPAddressString;
 import org.junit.Test;
 import org.springframework.util.ResourceUtils;
 
@@ -129,5 +131,89 @@ public class RIBTest {
 
         // then
         assertThat(beforeSize > lastSize, equalTo(true));
+    }
+
+    @Test
+    public void caseOne_AggregateDifferentIPAddressesShouldWorkOk() throws AddressStringException {
+        // given
+        String sIp1 = "192.168.0.0/24";
+        String sIp2 = "192.168.1.0/24";
+        IPAddress ip1 = new IPAddressString(sIp1).toAddress();
+        IPAddress ip2 = new IPAddressString(sIp2).toAddress();
+
+        // when
+        IPAddress newIp = RIB.aggregate(ip1, ip2);
+
+        // then
+        assertThat(newIp.toString(), equalTo("192.168.0.0/23"));
+    }
+
+    @Test
+    public void caseTwo_AggregateDifferentIPAddressesShouldWorkOk() throws AddressStringException {
+        // given
+        String sIp1 = "192.168.1.0/24";
+        String sIp2 = "192.168.2.0/24";
+        IPAddress ip1 = new IPAddressString(sIp1).toAddress();
+        IPAddress ip2 = new IPAddressString(sIp2).toAddress();
+
+        // when
+        IPAddress newIp = RIB.aggregate(ip1, ip2);
+
+        // then
+        assertThat(newIp, equalTo(null));
+    }
+
+    @Test
+    public void caseThree_AggregateDifferentIPAddressesShouldWorkOk() throws AddressStringException {
+        // given
+        String sIp1 = "192.168.2.0/24";
+        String sIp2 = "192.168.3.0/24";
+        IPAddress ip1 = new IPAddressString(sIp1).toAddress();
+        IPAddress ip2 = new IPAddressString(sIp2).toAddress();
+
+        // when
+        IPAddress newIp = RIB.aggregate(ip1, ip2);
+
+        // then
+        assertThat(newIp.toString(), equalTo("192.168.2.0/23"));
+    }
+
+    @Test
+    public void caseFor_AggregateDifferentIPAddressesShouldWorkOk() throws AddressStringException {
+        // given
+        String sIp1 = "192.128.0.0/16";
+        String sIp2 = "192.129.0.0/16";
+        IPAddress ip1 = new IPAddressString(sIp1).toAddress();
+        IPAddress ip2 = new IPAddressString(sIp2).toAddress();
+
+        // when
+        IPAddress newIp = RIB.aggregate(ip1, ip2);
+
+        // then
+        assertThat(newIp.toString(), equalTo("192.128.0.0/15"));
+    }
+
+    @Test
+    public void aggregateRIBShouldWorkOk() throws FileNotFoundException {
+        // given
+        String filePath = "json/full_rib_asn_6057.json";
+        File file = ResourceUtils.getFile("classpath:" + filePath);
+        Type type = new TypeToken<ArrayList<Map<String, String>>>() {
+        }.getType();
+        ArrayList<Map<String, String>> fullRib =
+                new GsonBuilder()
+                        .create()
+                        .fromJson(new JsonParser().parse(new FileReader(file)).getAsJsonArray(), type);
+        String entry = "198.32.132.75";
+
+        // when
+        Map<String, List<IPAddress>> ribGroupedByNexHop = RIB.groupByNextHop(fullRib);
+        Map<String, List<IPAddress>> ribFiltered = RIB.filterByIPv4Entries(ribGroupedByNexHop);
+        Map<String, List<IPAddress>> sortedRIB = RIB.sortRIB(ribFiltered);
+        Map<String, List<IPAddress>> cleanRIB = RIB.removeRIBRedundancy(sortedRIB);
+        Map<String, List<IPAddress>> aggregatedRIB = RIB.aggregateRIB(fullRib);
+
+        // then
+        assertThat(aggregatedRIB.get(entry).size() < cleanRIB.get(entry).size(), equalTo(true));
     }
 }
