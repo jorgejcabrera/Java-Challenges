@@ -18,6 +18,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -215,5 +216,31 @@ public class RIBTest {
 
         // then
         assertThat(aggregatedRIB.get(entry).size() < cleanRIB.get(entry).size(), equalTo(true));
+        assertThat(aggregatedRIB.entrySet().parallelStream().map(e -> e.getValue().size()).mapToInt(i -> i).sum(), equalTo(108));
+    }
+
+    @Test
+    public void aggregateRIBV2ShouldWorkOk() throws FileNotFoundException {
+        // given
+        String filePath = "json/full_rib_asn_6057_v2.json";
+        File file = ResourceUtils.getFile("classpath:" + filePath);
+        Type type = new TypeToken<ArrayList<Map<String, String>>>() {
+        }.getType();
+        ArrayList<Map<String, String>> fullRib =
+                new GsonBuilder()
+                        .create()
+                        .fromJson(new JsonParser().parse(new FileReader(file)).getAsJsonArray(), type);
+        String entry = "198.32.132.75";
+
+        // when
+        Map<String, List<IPAddress>> ribGroupedByNexHop = RIB.groupByNextHop(fullRib);
+        Map<String, List<IPAddress>> ribFiltered = RIB.filterByIPv4Entries(ribGroupedByNexHop);
+        Map<String, List<IPAddress>> sortedRIB = RIB.sortRIB(ribFiltered);
+        Map<String, List<IPAddress>> cleanRIB = RIB.removeRIBRedundancy(sortedRIB);
+        Map<String, List<IPAddress>> aggregatedRIB = RIB.aggregateRIB(fullRib);
+
+        // then
+        assertThat(aggregatedRIB.get(entry).size() <= cleanRIB.get(entry).size(), equalTo(true));
+        assertThat(aggregatedRIB.entrySet().parallelStream().map(e -> e.getValue().size()).mapToInt(i -> i).sum(), equalTo(2115));
     }
 }

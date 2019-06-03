@@ -19,7 +19,6 @@ public class RIB {
         Map<String, List<IPAddress>> sortedRIB = sortRIB(ribFiltered);
         Map<String, List<IPAddress>> cleanRIB = removeRIBRedundancy(sortedRIB);
 
-
         cleanRIB.entrySet().parallelStream().forEach(listEntry -> {
             List<IPAddress> ips = listEntry.getValue();
             IPAddress newIp = null;
