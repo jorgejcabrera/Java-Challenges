@@ -23,6 +23,7 @@ public class RIB {
                         x -> x.getValue()
                                 .parallelStream()
                                 .map(y -> y.get("o_asn"))
+                                .filter( s -> !s.equals(""))
                                 .collect(Collectors.toSet())));
     }
 

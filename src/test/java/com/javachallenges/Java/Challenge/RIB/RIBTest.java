@@ -246,7 +246,7 @@ public class RIBTest {
     }
 
     /**
-     * this test is an evidence of https://dyn.com/blog/backconnects-suspicious-bgp-hijacks/
+     * this test is an evidence of https://dyn.com/blog/backconnects-suspicious-bgp-hijacks/ hijack prefix
      * @throws FileNotFoundException
      */
     @Test
@@ -264,6 +264,7 @@ public class RIBTest {
         // when
         Map<String, Set<String>> list = RIB.groupByPrefix(data);
 
+        list.entrySet().stream().filter( entry -> entry.getValue().size() >1).collect(Collectors.toList());
         assertThat(list.get("82.118.233.0/24").contains("203959"), is(true));
         assertThat(list.get("82.118.233.0/24").contains("201133"), is(true));
         assertThat(list.get("82.118.233.0/24").size() > 1, is(true));
