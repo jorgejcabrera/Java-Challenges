@@ -13,6 +13,20 @@ public class RIB {
     private static final String NEXT_HOP = "next_hop";
     private static final String PREFIX = "prefix";
 
+    /**
+     * esta metodo devuelve una lista de prefijos que pudieron
+     * haber sido afectados por secuestro de rutas
+     */
+    public static Map<String, Set<String>> getAffectedPrefixes(ArrayList<Map<String, String>> data) {
+        Map<String, Set<String>> list = groupByPrefix(data);
+        return list
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().size() > 1)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+    }
+
     public static Map<String, Set<String>> groupByPrefix(ArrayList<Map<String, String>> data) {
         return data
                 .parallelStream()
@@ -23,7 +37,7 @@ public class RIB {
                         x -> x.getValue()
                                 .parallelStream()
                                 .map(y -> y.get("o_asn"))
-                                .filter( s -> !s.equals(""))
+                                .filter(s -> !s.equals(""))
                                 .collect(Collectors.toSet())));
     }
 

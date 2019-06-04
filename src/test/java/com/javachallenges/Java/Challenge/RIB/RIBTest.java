@@ -264,7 +264,7 @@ public class RIBTest {
         // when
         Map<String, Set<String>> list = RIB.groupByPrefix(data);
 
-        list.entrySet().stream().filter( entry -> entry.getValue().size() >1).collect(Collectors.toList());
+        assertThat(RIB.getAffectedPrefixes(data).containsKey("82.118.233.0/24"), is(true));
         assertThat(list.get("82.118.233.0/24").contains("203959"), is(true));
         assertThat(list.get("82.118.233.0/24").contains("201133"), is(true));
         assertThat(list.get("82.118.233.0/24").size() > 1, is(true));
