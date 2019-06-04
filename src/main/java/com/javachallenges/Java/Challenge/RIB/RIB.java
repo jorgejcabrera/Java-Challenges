@@ -13,6 +13,19 @@ public class RIB {
     private static final String NEXT_HOP = "next_hop";
     private static final String PREFIX = "prefix";
 
+    public static Map<String, Set<String>> groupByPrefix(ArrayList<Map<String, String>> data) {
+        return data
+                .parallelStream()
+                .collect(Collectors.groupingBy(entry -> entry.get("pref")))
+                .entrySet()
+                .parallelStream()
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                        x -> x.getValue()
+                                .parallelStream()
+                                .map(y -> y.get("o_asn"))
+                                .collect(Collectors.toSet())));
+    }
+
     public static Map<String, List<IPAddress>> aggregateRIB(ArrayList<Map<String, String>> fullRib) {
         Map<String, List<IPAddress>> ribGroupedByNexHop = groupByNextHop(fullRib);
         Map<String, List<IPAddress>> ribFiltered = filterByIPv4Entries(ribGroupedByNexHop);

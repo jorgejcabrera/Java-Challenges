@@ -18,6 +18,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -243,4 +244,29 @@ public class RIBTest {
         assertThat(aggregatedRIB.get(entry).size() <= cleanRIB.get(entry).size(), equalTo(true));
         assertThat(aggregatedRIB.entrySet().parallelStream().map(e -> e.getValue().size()).mapToInt(i -> i).sum(), equalTo(2115));
     }
+
+    /**
+     * this test is an evidence of https://dyn.com/blog/backconnects-suspicious-bgp-hijacks/
+     * @throws FileNotFoundException
+     */
+    @Test
+    public void bgpHijacksEvidence() throws FileNotFoundException {
+        // given
+        String filePath = "json/prefix_hijack.json";
+        File file = ResourceUtils.getFile("classpath:" + filePath);
+        Type type = new TypeToken<ArrayList<Map<String, String>>>() {
+        }.getType();
+        ArrayList<Map<String, String>> data =
+                new GsonBuilder()
+                        .create()
+                        .fromJson(new JsonParser().parse(new FileReader(file)).getAsJsonArray(), type);
+
+        // when
+        Map<String, Set<String>> list = RIB.groupByPrefix(data);
+
+        assertThat(list.get("82.118.233.0/24").contains("203959"), is(true));
+        assertThat(list.get("82.118.233.0/24").contains("201133"), is(true));
+        assertThat(list.get("82.118.233.0/24").size() > 1, is(true));
+    }
+
 }
