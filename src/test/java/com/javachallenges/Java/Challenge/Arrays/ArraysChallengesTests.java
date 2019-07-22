@@ -1,11 +1,14 @@
 package com.javachallenges.Java.Challenge.Arrays;
 
+import com.javachallenges.Java.Challenge.Others.MixedChallenges;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
