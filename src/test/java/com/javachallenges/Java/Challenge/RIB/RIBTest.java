@@ -36,7 +36,8 @@ public class RIBTest {
     ArrayList<Map<String, String>> fullRib =
         new GsonBuilder()
             .create()
-            .fromJson(new JsonParser().parse(new FileReader(file)).getAsJsonArray(), type);
+            .fromJson(new JsonParser().
+                    parse(new FileReader(file)).getAsJsonArray(), type);
 
     // when
     Map<String, List<IPAddress>> groupedByNextHop = RIB.groupByNextHop(fullRib);
